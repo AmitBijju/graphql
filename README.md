@@ -1,13 +1,8 @@
 graphql
 =======
 
-[![Build Status](https://travis-ci.org/shurcooL/graphql.svg?branch=master)](https://travis-ci.org/shurcooL/graphql) [![GoDoc](https://godoc.org/github.com/shurcooL/graphql?status.svg)](https://godoc.org/github.com/shurcooL/graphql)
-
 Package `graphql` provides a GraphQL client implementation.
 
-For more information, see package [`github.com/shurcooL/githubv4`](https://github.com/shurcooL/githubv4), which is a specialized version targeting GitHub GraphQL API v4. That package is driving the feature development.
-
-**Status:** In active early research and development. The API will change when opportunities for improvement are discovered; it is not yet frozen.
 
 Installation
 ------------
@@ -15,7 +10,7 @@ Installation
 `graphql` requires Go version 1.8 or later.
 
 ```bash
-go get -u github.com/shurcooL/graphql
+go get -u github.com/AmitBijju/graphql
 ```
 
 Usage
@@ -283,9 +278,9 @@ Directories
 
 | Path                                                                                   | Synopsis                                                                                                        |
 |----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| [example/graphqldev](https://godoc.org/github.com/shurcooL/graphql/example/graphqldev) | graphqldev is a test program currently being used for developing graphql package.                               |
-| [ident](https://godoc.org/github.com/shurcooL/graphql/ident)                           | Package ident provides functions for parsing and converting identifier names between various naming convention. |
-| [internal/jsonutil](https://godoc.org/github.com/shurcooL/graphql/internal/jsonutil)   | Package jsonutil provides a function for decoding JSON into a GraphQL query data structure.                     |
+| [example/graphqldev](https://godoc.org/github.com/AmitBijju/graphql/example/graphqldev) | graphqldev is a test program currently being used for developing graphql package.                               |
+| [ident](https://godoc.org/github.com/AmitBijju/graphql/ident)                           | Package ident provides functions for parsing and converting identifier names between various naming convention. |
+| [internal/jsonutil](https://godoc.org/github.com/AmitBijju/graphql/internal/jsonutil)   | Package jsonutil provides a function for decoding JSON into a GraphQL query data structure.                     |
 
 License
 -------
