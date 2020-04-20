@@ -73,17 +73,17 @@ func run() error {
 	variables := map[string]interface{}{
 		"characterID": graphql.ID("1003"),
 	}
-	err = client.Query(context.Background(), &q, variables)
+	err = client.Query(context.Background(), &q, variables, nil)
 	if err != nil {
 		return err
 	}
-	print(q)
+	printPretty(q)
 
 	return nil
 }
 
-// print pretty prints v to stdout. It panics on any error.
-func print(v interface{}) {
+// printPretty pretty prints v to stdout. It panics on any error.
+func printPretty(v interface{}) {
 	w := json.NewEncoder(os.Stdout)
 	w.SetIndent("", "\t")
 	err := w.Encode(v)

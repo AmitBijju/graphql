@@ -33,19 +33,19 @@ func NewClient(url string, httpClient *http.Client) *Client {
 // Query executes a single GraphQL query request,
 // with a query derived from q, populating the response into it.
 // q should be a pointer to struct that corresponds to the GraphQL schema.
-func (c *Client) Query(ctx context.Context, q interface{}, variables map[string]interface{}) error {
-	return c.do(ctx, queryOperation, q, variables)
+func (c *Client) Query(ctx context.Context, q interface{}, variables map[string]interface{}, headers map[string]string) error {
+	return c.do(ctx, queryOperation, q, variables, headers)
 }
 
 // Mutate executes a single GraphQL mutation request,
 // with a mutation derived from m, populating the response into it.
 // m should be a pointer to struct that corresponds to the GraphQL schema.
-func (c *Client) Mutate(ctx context.Context, m interface{}, variables map[string]interface{}) error {
-	return c.do(ctx, mutationOperation, m, variables)
+func (c *Client) Mutate(ctx context.Context, m interface{}, variables map[string]interface{}, headers map[string]string) error {
+	return c.do(ctx, mutationOperation, m, variables, headers)
 }
 
 // do executes a single GraphQL operation.
-func (c *Client) do(ctx context.Context, op operationType, v interface{}, variables map[string]interface{}) error {
+func (c *Client) do(ctx context.Context, op operationType, v interface{}, variables map[string]interface{}, headers map[string]string) error {
 	var query string
 	switch op {
 	case queryOperation:
@@ -65,7 +65,20 @@ func (c *Client) do(ctx context.Context, op operationType, v interface{}, variab
 	if err != nil {
 		return err
 	}
-	resp, err := ctxhttp.Post(ctx, c.httpClient, c.url, "application/json", &buf)
+
+	req, err := http.NewRequest("POST", c.url, &buf)
+	if err != nil {
+		return err
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	if headers != nil {
+		for key, value := range headers {
+			req.Header.Set(key, value)
+		}
+	}
+
+	resp, err := ctxhttp.Do(ctx, c.httpClient, req)
 	if err != nil {
 		return err
 	}
